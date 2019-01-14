@@ -132,8 +132,6 @@ app.post('/items/query', function(req, res) { // POST request to query items wit
     const query = req.body.query;
     const returnAvail = JSON.parse(req.body.returnAvail);
 
-    console.log(returnAvail);
-
     req.db.collection(ITEM_DB).find({ title: query }).toArray(function(err, items) {
         if (err) {
             utils.handleUnexpectedError(err, res);
@@ -163,7 +161,6 @@ app.get('/cart', function(req, res) { // GET request to fetch your shopping cart
             return;
         }
         if (cart.length < 1) {
-            console.log('New cart!');
             const newCart = {
                 cartID: shortid.generate(),
                 items: [],
@@ -177,7 +174,6 @@ app.get('/cart', function(req, res) { // GET request to fetch your shopping cart
                 res.send(newCart);
             });
         } else {
-            console.log('Existing cart!');
             res.send(cart[0]);
         }
     });
@@ -200,7 +196,6 @@ app.post('/cart/add', function(req, res) { // POST request to add items to the s
         item = item[0];
 
         req.db.collection(CART_DB).find().toArray(function(err, cart) {
-            console.log(cart[0]);
             if (err) {
                 utils.handleUnexpectedError(err, res);
                 return;
@@ -248,7 +243,6 @@ app.post('/cart/add', function(req, res) { // POST request to add items to the s
                 };
 
                 cart[0].items.push(cartItem);
-                console.log(cart[0].items);
                 cart[0].total += item.price * quantity;
 
                 req.db.collection(CART_DB).updateOne({ cartID: cart[0].cartID }, { $set: { items: cart[0].items, total: cart[0].total } }, function(err) {
