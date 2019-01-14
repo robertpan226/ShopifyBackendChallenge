@@ -5,6 +5,7 @@ I've implemented the marketplace using a nodejs express mongodb stack. It featur
 - A shopping cart that allows you to add/remove/purchase products in the cart
 - Error checking ie. " " as a title name for a product or prompting user if a db call fails
 - Error statements ie. checking out a cart that's empty or adding an product to cart where requested quantity > inventory_count
+- Appropriate HTTPS status codes to error messages
 - Endpoints that are grouped together ie. checking out the cart is '/cart/checkout' and retrieving the cart is '/cart'
 
 Design/Thought Process:
