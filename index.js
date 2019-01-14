@@ -22,7 +22,7 @@ const port = 3000;
 
 app.post('/items/add', function(req, res) { // POST request to add new items to the marketplace
     const newItem = {
-        itemID: shortid.generate(),
+        itemID: shortid.generate(), // in case we decide to allow duplicate product titles, the itemID can serve as an unique identifer to the product
         title: req.body.title,
         price: req.body.price,
         inventory_count: req.body.inventory_count
@@ -48,7 +48,7 @@ app.post('/items/add', function(req, res) { // POST request to add new items to 
             utils.handleUnexpectedError(err, res);
             return;
         }
-        if (item.length == 1) { // to check if the new item's title is already taken
+        if (item.length == 1) { // to check if the new item's title is already taken, this marketplace currently only allows for unique item titles
             res.status(409).send('Error, title name already taken.');
             return;
         }
