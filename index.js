@@ -162,9 +162,9 @@ app.get('/cart', function(req, res) { // GET request to fetch your shopping cart
         }
         if (cart.length < 1) {
             const newCart = {
-                cartID: shortid.generate(),
+                cartID: shortid.generate(), // to allow for multiple cart instances in the future, currently only supports 1 cart  
                 items: [],
-                total: 0
+                total: 0 // current subtotal in the cart
             };
             req.db.collection(CART_DB).insertOne(newCart, function(err) {
                 if (err) {
@@ -218,7 +218,6 @@ app.post('/cart/add', function(req, res) { // POST request to add items to the s
                     currentItem.quantity += quantity;
                     cart[0].total += item.price * quantity;
 
-                    // not setting/updating item quantity properly
                     req.db.collection(CART_DB).updateOne({ cartID: cart[0].cartID }, { $set: { items: cart[0].items, total: cart[0].total } }, function(err) {
                         if (err) {
                             utils.handleUnexpectedError(err, res);
