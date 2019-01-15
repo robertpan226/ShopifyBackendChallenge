@@ -33,4 +33,4 @@ GET `/cart/checkout` - Checks out your cart, deducts the number of items in your
 
 To install:
 
-Clone this repo, type `npm install` and then `npm start`. The database will initially be empty and will have to be populated with POST `/items/add` manually.
+Clone this repo, type `npm install` and then `npm start`. The database will initially be empty and will have to be populated with POST `/items/add` manually. You can use the application Postman to call the API endpoints. 
