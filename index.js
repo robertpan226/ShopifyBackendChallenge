@@ -62,7 +62,7 @@ app.post('/items/add', function(req, res) { // POST request to add new items to 
     });
 });
 
-app.delete('/items/remove/', function(req, res) { // DELETE request to remove an item from the marketplace
+app.delete('/items/remove', function(req, res) { // DELETE request to remove an item from the marketplace
     const itemTitle = req.body.item;
 
     req.db.collection(ITEM_DB).find({ title: itemTitle }).toArray(function(err, item) {
